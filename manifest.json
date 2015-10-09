@@ -1,0 +1,18 @@
+{
+  "manifest_version": 2,
+  "name": "Twitter Icon Notifier",
+  "version": "0.1",
+  "description": "Changes the icon for Twitter when new tweets arrive. Useful when using Twitter as a pinned tab.",
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://twitter.com/*"],
+      "js": ["notify.js"]
+    }
+  ],
+  "permissions": [
+    "https://abs.twimg.com/"
+  ]
+}
