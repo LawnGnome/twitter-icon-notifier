@@ -20,8 +20,6 @@
     });
   };
 
-  var element = document.querySelector(".js-new-items-bar-container");
-  if (element) {
-    new MutationObserver(check).observe(element, {childList: true});
-  }
+  var observer = new MutationObserver(check);
+  observer.observe(document.body, {subtree: true, childList: true});
 })();
