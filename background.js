@@ -38,10 +38,22 @@ Icon.prototype.draw = function (num) {
 
   // Add text if necessary.
   if (num > 0) {
+    var halfHeight = 0.5 * this.canvas.height;
+    var halfWidth = 0.5 * this.canvas.width;
+
     this.context.font = (this.canvas.height * 0.6).toString() + "px " + this.fontFamily;
-    this.context.textAlign = "right";
-    this.context.textBaseline = "baseline";
-    this.context.fillText(num.toString(), this.canvas.width, this.canvas.height, this.canvas.width);
+    this.context.textAlign = "center";
+    this.context.textBaseline = "middle";
+    this.context.fillText(num.toString(), halfWidth, halfHeight, this.canvas.width);
+
+    // Also draw a background to make the text more visible.
+    var gradient = this.context.createRadialGradient(halfWidth, halfHeight, 0, halfWidth, halfHeight, Math.min(halfHeight, halfWidth));
+    gradient.addColorStop(0, "rgba(255, 255, 255, 0.5)");
+    gradient.addColorStop(1, "rgba(255, 255, 255, 0)");
+    var prevFillStyle = this.context.fillStyle;
+    this.context.fillStyle = gradient;
+    this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
+    this.context.fillStyle = prevFillStyle;
   }
 
   return this.canvas.toDataURL();
