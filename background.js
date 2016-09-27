@@ -41,12 +41,7 @@ Icon.prototype.draw = function (num) {
     var halfHeight = 0.5 * this.canvas.height;
     var halfWidth = 0.5 * this.canvas.width;
 
-    this.context.font = (this.canvas.height * 0.6).toString() + "px " + this.fontFamily;
-    this.context.textAlign = "center";
-    this.context.textBaseline = "middle";
-    this.context.fillText(num.toString(), halfWidth, halfHeight, this.canvas.width);
-
-    // Also draw a background to make the text more visible.
+    // Draw a background to make the text more visible.
     var gradient = this.context.createRadialGradient(halfWidth, halfHeight, 0, halfWidth, halfHeight, Math.min(halfHeight, halfWidth));
     gradient.addColorStop(0, "rgba(255, 255, 255, 0.5)");
     gradient.addColorStop(1, "rgba(255, 255, 255, 0)");
@@ -54,6 +49,11 @@ Icon.prototype.draw = function (num) {
     this.context.fillStyle = gradient;
     this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
     this.context.fillStyle = prevFillStyle;
+
+    this.context.font = (this.canvas.height * 0.6).toString() + "px " + this.fontFamily;
+    this.context.textAlign = "center";
+    this.context.textBaseline = "middle";
+    this.context.fillText(num.toString(), halfWidth, halfHeight, this.canvas.width);
   }
 
   return this.canvas.toDataURL();
