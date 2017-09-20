@@ -3,7 +3,7 @@ var Icon = function (window) {
 
   // Set up the container for our canvas so we can draw the new icons as
   // needed.
-  this.source = this.createSourceImage("https://abs.twimg.com/favicons/favicon.ico", function () {
+  this.createSourceImage("https://abs.twimg.com/favicons/favicon.ico", function () {
     self.canvas = self.createCanvas(window.document.body, self.source);
     self.context = self.canvas.getContext("2d");
   });
@@ -23,12 +23,18 @@ Icon.prototype.createCanvas = function (container, source) {
 };
 
 Icon.prototype.createSourceImage = function (src, onload) {
-  var img = new Image();
+  var self = this;
+  var xhr = new XMLHttpRequest();
 
-  img.onload = onload;
-  img.src = src;
-
-  return img;
+  xhr.responseType = "blob";
+  xhr.onload = function () {
+    createImageBitmap(xhr.response).then(function (bitmap) {
+      self.source = bitmap;
+      onload();
+    });
+  };
+  xhr.open("GET", src, true);
+  xhr.send();
 };
 
 Icon.prototype.draw = function (num) {

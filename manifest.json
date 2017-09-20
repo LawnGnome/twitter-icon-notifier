@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Twitter Icon Notifier",
-  "version": "0.1",
+  "version": "0.2.1",
   "description": "Changes the icon for Twitter when new tweets arrive. Useful when using Twitter as a pinned tab.",
   "icons": {
     "128": "extension-icon-128.png"
@@ -16,6 +16,6 @@
     }
   ],
   "permissions": [
-    "https://abs.twimg.com/"
+    "*://abs.twimg.com/*"
   ]
 }
